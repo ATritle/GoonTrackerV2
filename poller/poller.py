@@ -1,9 +1,24 @@
-import time
+from database.db import db
+from database.models import PollResult
+
+from .dummy import DummyCollector
 
 
-def start():
+def run_once():
 
-    while True:
-        print("Polling...")
+    collector = DummyCollector()
 
-        time.sleep(60)
+    data = collector.poll()
+
+    row = PollResult(
+        source=data["source"],
+        boss=data["boss"],
+        current_map=data["current_map"],
+        confidence=data["confidence"]
+    )
+
+    db.session.add(row)
+
+    db.session.commit()
+
+    return row
