@@ -1,7 +1,7 @@
 from database.db import db
 from database.models import PollResult
 
-from .dummy import DummyCollector
+from .collectors.dummy import DummyCollector
 
 
 def run_once():
@@ -11,10 +11,11 @@ def run_once():
     data = collector.poll()
 
     row = PollResult(
-        source=data["source"],
-        boss=data["boss"],
-        current_map=data["current_map"],
-        confidence=data["confidence"]
+        source=data.source,
+        boss=data.boss,
+        current_map=data.current_map,
+        confidence=data.confidence,
+        polled_at=data.polled_at,
     )
 
     db.session.add(row)
