@@ -3,21 +3,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 class Config:
-    SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
+    SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret")
 
-    DATABASE_URL = os.getenv("DATABASE_URL")
+    database_url = os.getenv("DATABASE_URL")
 
-    # Railway sometimes provides postgres:// instead of postgresql://
-    if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
-        DATABASE_URL = DATABASE_URL.replace(
+    if database_url and database_url.startswith("postgres://"):
+        database_url = database_url.replace(
             "postgres://",
             "postgresql://",
-            1
+            1,
         )
 
-    SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    SQLALCHEMY_DATABASE_URI = database_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     TARKOV_API = "https://api.tarkov.dev/graphql"
