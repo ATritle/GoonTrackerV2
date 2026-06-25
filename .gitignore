@@ -21,3 +21,19 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Test cache
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Build artifacts
+dist/
+build/
