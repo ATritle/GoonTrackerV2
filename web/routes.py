@@ -1,6 +1,7 @@
 from flask import Blueprint
 
 from database.models import PollResult
+from poller.poller import run_once
 
 bp = Blueprint("main", __name__)
 
@@ -26,3 +27,16 @@ def home():
 
     Confidence: {latest.confidence}
     """
+
+
+@bp.route("/admin/poll")
+def manual_poll():
+
+    result = run_once()
+
+    return {
+        "source": result.source,
+        "boss": result.boss,
+        "map": result.current_map,
+        "confidence": result.confidence,
+    }

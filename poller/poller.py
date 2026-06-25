@@ -1,25 +1,26 @@
-from database.db import db
-from database.models import PollResult
+import logging
 
 from .collectors.dummy import DummyCollector
+from .validator import validate
+from .storage import save
 
+logger = logging.getLogger(__name__)
 
 def run_once():
 
     collector = DummyCollector()
 
-    data = collector.poll()
+    location = collector.poll()
 
-    row = PollResult(
-        source=data.source,
-        boss=data.boss,
-        current_map=data.current_map,
-        confidence=data.confidence,
-        polled_at=data.polled_at,
+    validated = validate(location)
+
+    save(validated)
+
+    logger.info(
+        "Collector %s reported %s on %s",
+        validated.source,
+        validated.boss,
+        validated.current_map,
     )
 
-    db.session.add(row)
-
-    db.session.commit()
-
-    return row
+    return validated
