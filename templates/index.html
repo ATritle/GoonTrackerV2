@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="status-card">
+
+        <div class="status-title">
+            🔴 GOONS ACTIVE
+        </div>
+
+        <div class="map-name" id="map-name">
+            {{ latest.current_map }}
+        </div>
+
+        <div class="game-mode" id="game-mode">
+            {{ latest.game_mode }}
+        </div>
+
+    </div>
+
+    <div class="info-card">
+
+        <div class="info-row">
+            <span class="label">Boss</span>
+            <span id="boss">{{ latest.boss }}</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Reported By</span>
+            <span id="reporter">{{ latest.reporter }}</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Report Time</span>
+            <span id="report-time">{{ latest.report_time }}</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Source</span>
+            <span id="source">{{ latest.source }}</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Confidence</span>
+            <span id="confidence">{{ "%.0f"|format(latest.confidence * 100) }}%</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Last Updated</span>
+            <span id="last-updated">{{ last_updated }}</span>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

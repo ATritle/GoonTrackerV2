@@ -9,6 +9,9 @@ def save(location):
         boss=location.boss,
         current_map=location.current_map,
         confidence=location.confidence,
+        game_mode=location.game_mode,
+        reporter=location.reporter,
+        report_time=location.report_time,
         polled_at=location.polled_at,
     )
 

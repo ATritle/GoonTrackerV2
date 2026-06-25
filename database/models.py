@@ -15,8 +15,12 @@ class PollResult(db.Model):
 
     confidence = db.Column(db.Float, nullable=False)
 
+    game_mode = db.Column(db.String(10))
+    reporter = db.Column(db.String(100))
+    report_time = db.Column(db.String(50))
+
     polled_at = db.Column(
         db.DateTime,
-        default=datetime.utcnow,
+        default=lambda: datetime.now(datetime.UTC),
         nullable=False
     )

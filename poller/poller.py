@@ -1,14 +1,15 @@
 import logging
 
-from .collectors.dummy import DummyCollector
+from .collectors.tarkovbot import TarkovBotCollector
 from .validator import validate
 from .storage import save
 
 logger = logging.getLogger(__name__)
 
+
 def run_once():
 
-    collector = DummyCollector()
+    collector = TarkovBotCollector()
 
     location = collector.poll()
 
